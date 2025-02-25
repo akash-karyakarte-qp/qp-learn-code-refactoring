@@ -18,11 +18,12 @@ export class OrderManagementSystem {
 
   private static generateInvoice(order: Order): void {
     console.log("Generating Invoice...");
-    console.log(`Customer: ${order.customer.name()}`);
+    console.log(`Customer: ${order.customer.name}`);
     console.log(`Total: $${order.totalPrice}`);
     console.log(`Discounted Total: $${order.discountedPrice}`);
     console.log(`Items: ${order.items.map(({ item }) => item).join(", ")}`);
     console.log("Thank you for shopping with us!");
   }
 }
+
 

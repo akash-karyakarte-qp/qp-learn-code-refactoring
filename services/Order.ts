@@ -1,27 +1,43 @@
 import { Customer } from "./Customer";
 
 export class Order {
-  private customer: Customer;
-  private items: { item: string; price: number }[] = [];
-  private totalPrice: number = 0;
-  private discountedPrice: number = 0;
+  private _customer: Customer;
+  private _items: { item: string; price: number }[] = [];
+  private _totalPrice: number = 0;
+  private _discountedPrice: number = 0;
 
   constructor(customer: Customer) {
-    this.customer = customer;
+    this._customer = customer;
+  }
+
+  get customer(): Customer {
+    return this._customer;
+  }
+
+  get items(): { item: string; price: number }[] {
+    return this._items;
   }
 
   addItem(item: string, price: number): void {
-    this.items.push({ item, price });
+    this._items.push({ item, price });
     this.calculateTotal();
   }
 
   private calculateTotal(): void {
-    this.totalPrice = this.items.reduce((sum, { price }) => sum + price, 0);
+    this._totalPrice = this._items.reduce((sum, { price }) => sum + price, 0);
     this.applyDiscount();
   }
 
   private applyDiscount(): void {
-    this.discountedPrice = this.totalPrice * (1 - this.customer.discount);
+    this._discountedPrice = this._totalPrice * (1 - this.customer.discount);
+  }
+
+  get totalPrice(): number {
+    return this._totalPrice;
+  }
+
+  get discountedPrice(): number {
+    return this._discountedPrice;
   }
 
   printOrder(): void {
@@ -31,3 +47,4 @@ export class Order {
     console.log(`Discounted Price: ${this.discountedPrice.toFixed(2)}`);
   }
 }
+
