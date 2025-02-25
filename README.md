@@ -1,1 +1,0 @@
-# qp-learn-code-refactoring
